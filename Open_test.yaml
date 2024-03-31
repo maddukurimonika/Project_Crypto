@@ -1,96 +1,58 @@
-{
-  "openapi": "3.0.3",
-  "info": {
-    "title": "New Spec - OpenAPI 3.0",
-    "description": "This is a sample description about this spec.",
-    "termsOfService": "",
-    "contact": {
-      "email": ""
-    },
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    },
-    "version": "1.0.0"
-  },
-  "servers": [
-    {
-      "url": "https://mempool.space",
-      "description": ""
-    },
-    {
-      "url": "https://web.squarecdn.com",
-      "description": ""
-    },
-    {
-      "url": "https://stats.mempool.space",
-      "description": ""
-    },
-    {
-      "url": "wss://mempool.space",
-      "description": ""
-    }
-  ],
-  "paths": {
-    "/api/v1/lightning/nodes/isp/{nodeId}": {
-      "get": {
-        "description": "Retrieves information about a specific node.",
-        "operationId": "get-api-v1-lightning-nodes-isp-nodeId",
-        "parameters": [
-          {
-            "name": "nodeId",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the node to retrieve.",
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isp": {
-                      "type": "string",
-                      "description": "The Internet Service Provider for the node."
-                    },
-                    "nodes": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "alias": {
-                            "type": "string"
-                          },
-                          "capacity": {
-                            "type": "integer"
-                          },
-                          "channels": {
-                            "type": "integer"
-                          },
-                          "city": {
-                            "type": "object",
-                            "properties": {
-                              "en": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+openapi: 3.0.0
+info:
+  title: Mining Pools Mempool API
+  version: 1.0.0
+paths:
+  /lightning/nodes/isp/{ispId}:
+    get:
+      summary: Returns aggregate capacity, number of nodes, and number of channels for a specific ISP by ISP ID.
+      description: Capacity figures are in satoshis. ISP ID is a dynamic parameter that should be provided in the path.
+      parameters:
+        - name: ispId
+          in: path
+          required: true
+          description: The unique identifier for the Internet Service Provider.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Detailed information of the specified ISP including aggregate capacity, number of nodes, and number of channels.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ispRankingStats"
+components:
+  schemas:
+    ispRankingStats:
+      type: object
+      properties:
+        clearnetCapacity:
+          type: integer
+          description: Total clearnet capacity for the ISP in satoshis.
+        torCapacity:
+          type: integer
+          description: Total Tor capacity for the ISP in satoshis.
+        unknownCapacity:
+          type: integer
+          description: Total unknown capacity for the ISP in satoshis.
+        ispRanking:
+          type: array
+          description: Ranking of ISPs based on the provided metrics.
+          items:
+            type: object
+            properties:
+              ispId:
+                type: integer
+                description: Unique identifier for the Internet Service Provider.
+              name:
+                type: string
+                description: Name of the Internet Service Provider.
+              capacity:
+                type: integer
+                description: Aggregate capacity provided by the ISP in satoshis.
+              nodeCount:
+                type: integer
+                description: Number of nodes hosted by the ISP.
+              channelCount:
+                type: integer
+                description: Number of channels hosted by the ISP.
