@@ -28,20 +28,7 @@ paths:
                   nodes:
                     type: array
                     items:
-                      $ref: "#/components/schemas/ConnectivityNode1"
-  /lightning/nodes/rankings/connectivity:
-    get:
-      summary: Get rankings of Lightning Network nodes by Connectivity
-      description: Retrieve a list of Lightning Network nodes ranked by their Connectivity, along with relevant details.
-      responses:
-        "200":
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ConnectivityNode"
+                      $ref: "#/components/schemas/ConnectivityNode"
 
 components:
   schemas:
@@ -95,55 +82,3 @@ components:
         subdivision:
           type: string
           description: The subdivision (e.g., state or province) where the node is located, if available.
-          
-    ConnectivityNode1:
-      type: object
-      properties:
-        publicKey:
-          type: string
-          description: The public key identifying the Lightning Network node.
-        alias:
-          type: string
-          description: A human-readable alias for the node.
-        capacity:
-          type: integer
-          description: The total capacity of the node in satoshis.
-        channels:
-          type: integer
-          description: The number of channels the node has open.
-        firstSeen:
-          type: integer
-          description: The timestamp when the node was first seen.
-        updatedAt:
-          type: integer
-          description: The timestamp when the node's information was last updated.
-        city:
-          type: string
-          description: The city where the node is located, if available.
-        country:
-          type: object
-          properties:
-            de:
-              type: string
-            en:
-              type: string
-            es:
-              type: string
-            fr:
-              type: string
-            ja:
-              type: string
-            pt-BR:
-              type: string
-            ru:
-              type: string
-            zh-CN:
-              type: string
-          description: The country where the node is located, with translations.
-        iso_code:
-          type: string
-          description: The ISO code of the country where the node is located.
-        subdivision:
-          type: string
-          description: The subdivision (e.g., state or province) where the node is located, if available.
-          
