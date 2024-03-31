@@ -95,6 +95,7 @@ components:
         subdivision:
           type: string
           description: The subdivision (e.g., state or province) where the node is located, if available.
+          
     ConnectivityNode1:
       type: object
       properties:
