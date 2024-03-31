@@ -26,33 +26,107 @@ components:
     ispRankingStats:
       type: object
       properties:
-        clearnetCapacity:
-          type: integer
-          description: Total clearnet capacity for the ISP in satoshis.
-        torCapacity:
-          type: integer
-          description: Total Tor capacity for the ISP in satoshis.
-        unknownCapacity:
-          type: integer
-          description: Total unknown capacity for the ISP in satoshis.
-        ispRanking:
+        isp:
+          type: string
+          description: Name of the Internet Service Provider.
+        nodes:
           type: array
-          description: Ranking of ISPs based on the provided metrics.
           items:
             type: object
             properties:
-              ispId:
+              ISpNode:
                 type: integer
-                description: Unique identifier for the Internet Service Provider.
-              name:
+                description: Description of the ISpNode property.
+              public_key:
                 type: string
-                description: Name of the Internet Service Provider.
+                description: Public key of the node.
               capacity:
                 type: integer
-                description: Aggregate capacity provided by the ISP in satoshis.
-              nodeCount:
+                description: Capacity of the node in satoshis.
+              channels:
                 type: integer
-                description: Number of nodes hosted by the ISP.
-              channelCount:
+                description: Number of channels hosted by the node.
+              alias:
+                type: string
+                description: Alias of the node.
+              first_seen:
                 type: integer
-                description: Number of channels hosted by the ISP.
+                description: Timestamp when the node was first seen.
+              updated_at:
+                type: integer
+                description: Timestamp when the node was last updated.
+              city:
+                type: object
+                properties:
+                  en:
+                    type: string
+                    description: City name in English.
+                  ru:
+                    type: string
+                    description: City name in Russian.
+                description: City information of the node.
+              country:
+                type: object
+                properties:
+                  de:
+                    type: string
+                    description: Country name in German.
+                  en:
+                    type: string
+                    description: Country name in English.
+                  es:
+                    type: string
+                    description: Country name in Spanish.
+                  fr:
+                    type: string
+                    description: Country name in French.
+                  ja:
+                    type: string
+                    description: Country name in Japanese.
+                  pt-BR:
+                    type: string
+                    description: Country name in Portuguese (Brazil).
+                  ru:
+                    type: string
+                    description: Country name in Russian.
+                  zh-CN:
+                    type: string
+                    description: Country name in Chinese (Simplified).
+                description: Country information of the node.
+              iso_code:
+                type: string
+                description: ISO code of the country.
+              subdivision:
+                type: object
+                properties:
+                  de:
+                    type: string
+                    description: Subdivision name in German.
+                  en:
+                    type: string
+                    description: Subdivision name in English.
+                  es:
+                    type: string
+                    description: Subdivision name in Spanish.
+                  fr:
+                    type: string
+                    description: Subdivision name in French.
+                  ja:
+                    type: string
+                    description: Subdivision name in Japanese.
+                  pt-BR:
+                    type: string
+                    description: Subdivision name in Portuguese (Brazil).
+                  ru:
+                    type: string
+                    description: Subdivision name in Russian.
+                  zh-CN:
+                    type: string
+                    description: Subdivision name in Chinese (Simplified).
+                description: Subdivision information of the node.
+              longitude:
+                type: number
+                description: Longitude of the node location.
+              latitude:
+                type: number
+                description: Latitude of the node location.
