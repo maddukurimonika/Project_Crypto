@@ -1,71 +1,98 @@
-openapi: 3.0.0
-info:
-  title: Connectivity Ranking API
-  version: 1.0.0
-paths:
-  /lightning/nodes/rankings/connectivity:
-    get:
-      summary: Get rankings of Lightning Network nodes by Connectivity
-      description: Retrieve a list of Lightning Network nodes ranked by their Connectivity, along with relevant details.
-      responses:
-        "200":
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ConnectivityNode"
-
-components:
-  schemas:
-    ConnectivityNode:
-      type: object
-      properties:
-        publicKey:
-          type: string
-          description: The public key identifying the Lightning Network node.
-        alias:
-          type: string
-          description: A human-readable alias for the node.
-        capacity:
-          type: integer
-          description: The total capacity of the node in satoshis.
-        channels:
-          type: integer
-          description: The number of channels the node has open.
-        firstSeen:
-          type: integer
-          description: The timestamp when the node was first seen.
-        updatedAt:
-          type: integer
-          description: The timestamp when the node's information was last updated.
-        city:
-          type: string
-          description: The city where the node is located, if available.
-        country:
-          type: object
-          properties:
-            de:
-              type: string
-            en:
-              type: string
-            es:
-              type: string
-            fr:
-              type: string
-            ja:
-              type: string
-            pt-BR:
-              type: string
-            ru:
-              type: string
-            zh-CN:
-              type: string
-          description: The country where the node is located, with translations.
-        iso_code:
-          type: string
-          description: The ISO code of the country where the node is located.
-        subdivision:
-          type: string
-          description: The subdivision (e.g., state or province) where the node is located, if available.
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "New Spec - OpenAPI 3.0",
+    "description": "This is a sample description about this spec.",
+    "termsOfService": "",
+    "contact": {
+      "email": ""
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://mempool.space",
+      "description": ""
+    },
+    {
+      "url": "https://web.squarecdn.com",
+      "description": ""
+    },
+    {
+      "url": "https://stats.mempool.space",
+      "description": ""
+    },
+    {
+      "url": "wss://mempool.space",
+      "description": ""
+    }
+  ],
+  "paths": {
+    "/api/v1/lightning/nodes/isp/{nodeId}": {
+      "get": {
+        "description": "Retrieves information about a specific node.",
+        "operationId": "get-api-v1-lightning-nodes-isp-nodeId",
+        "parameters": [
+          {
+            "name": "nodeId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the node to retrieve.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isp": {
+                      "type": "string",
+                      "description": "The Internet Service Provider for the node."
+                    },
+                    "nodes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "alias": {
+                            "type": "string"
+                          },
+                          "capacity": {
+                            "type": "integer"
+                          },
+                          "channels": {
+                            "type": "integer"
+                          },
+                          "city": {
+                            "type": "object",
+                            "properties": {
+                              "en": {"type": "string"}
+                              // Additional properties as necessary
+                            }
+                          }
+                          // Additional properties as necessary
+                        }
+                      }
+                    }
+                    // Include other relevant properties for your response
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // Additional components like security, tags, etc., as necessary
+}
