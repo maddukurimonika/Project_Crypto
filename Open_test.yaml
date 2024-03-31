@@ -76,15 +76,14 @@
                           "city": {
                             "type": "object",
                             "properties": {
-                              "en": {"type": "string"}
-                              // Additional properties as necessary
+                              "en": {
+                                "type": "string"
+                              }
                             }
                           }
-                          // Additional properties as necessary
                         }
                       }
                     }
-                    // Include other relevant properties for your response
                   }
                 }
               }
@@ -94,5 +93,4 @@
       }
     }
   }
-  // Additional components like security, tags, etc., as necessary
 }
