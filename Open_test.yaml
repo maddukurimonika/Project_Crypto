@@ -3,6 +3,32 @@ info:
   title: Connectivity Ranking API
   version: 1.0.0
 paths:
+  /lightning/nodes/rankings/isp/{number}:
+    get:
+      summary: Get rankings of Lightning Network nodes by ISP
+      description: Retrieve a list of Lightning Network nodes ranked by their ISP, along with relevant details.
+      parameters:
+        - in: path
+          name: number
+          required: true
+          schema:
+            type: integer
+          description: The number to be used in the path.
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isp:
+                    type: string
+                    description: The Internet Service Provider (ISP) hosting the API.
+                  nodes:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ConnectivityNode"
   /lightning/nodes/rankings/connectivity:
     get:
       summary: Get rankings of Lightning Network nodes by Connectivity
